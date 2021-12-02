@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "aoc2021"
+version = "0.1.0"
+description = ""
+authors = ["Kevin in HomeWSL <kevin820606@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "3.9"
+numpy = "^1.21.4"
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.910"
+black = {version = "^21.11b1", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
