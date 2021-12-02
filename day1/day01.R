@@ -1,6 +1,6 @@
-#! /usr/bin/R
+#! /usr/bin/Rscript
 
-# read file
+# read data
 data_1 <- read.table("data/data_01.txt")
 # Lag 1 data point
 data_1$V1 |>
