@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 from typing import Protocol
 
-with open("../data/data_02.txt", mode="r") as data:
+with open("data/data_02.txt", mode="r") as data:
     commands = data.read().splitlines()
 
 
