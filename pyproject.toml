@@ -5,8 +5,9 @@ description = ""
 authors = ["Kevin in HomeWSL <kevin820606@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "3.9"
+python = "^3.9, <3.11"
 numpy = "^1.21.4"
+scipy = "^1.7.3"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.910"
