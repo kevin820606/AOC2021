@@ -20,27 +20,63 @@ epsilon_rate = int("".join(map(str, (epsilon_rate_judgement).astype(int))), 2)
 gamma_rate * epsilon_rate
 
 # Q2
-from scipy import stats
+# pure loop solution
+from collections import Counter
 
-OGR_mat = mat.copy()
+ogclists = raw_data.copy()
+csrlists = raw_data.copy()
+csrnum = ""
+ogcnum = ""
 for i in range(0, 12):
-    mode, _ = stats.mode(OGR_mat[:, i])
-    row, _ = np.where(OGR_mat[:, i] == mode)
-    print(i, mode)
-    OGR_mat = OGR_mat[row]
-OGRate = int("".join(map(str, OGR_mat.tolist()[0])), 2)
-print(OGRate)
 
-CSR_mat = mat.copy()
-for i in range(0, 12):
-    mode_old, _ = stats.mode(CSR_mat[:, i])
-    mode = 1 - mode_old
-    row, _ = np.where(CSR_mat[:, i] == mode)
-    if row.size == 0:
-        print(CSR_mat)
-        break
-    print(i, mode_old, mode)
-    CSR_mat = CSR_mat[row]
-CSRate = int("".join(map(str, CSR_mat.tolist()[0])), 2)
-print(CSRate)
-print(OGRate * CSRate)
+    mode_ogc = Counter({"0": 0, "1": 0})
+    mode_csr = Counter({"0": 0, "1": 0})
+    # find mode
+    for numberlist in ogclists:
+        mode_ogc += Counter(numberlist[i])
+    for numberlist in csrlists:
+        mode_csr += Counter(numberlist[i])
+    zeroogc = mode_ogc["0"]
+    oneogc = mode_ogc["1"]
+    zerocsr = mode_csr["0"]
+    onecsr = mode_csr["1"]
+    mode_num_ogc = "1"
+    mode_num_csr = "0"
+    # print(f"{zeroogc=}, {oneogc=}")
+    # print(f"{zerocsr=}, {onecsr=}")
+
+    if zeroogc > oneogc:
+        mode_num_ogc = "0"
+    if zerocsr > onecsr:
+        mode_num_csr = "1"
+    ogcnum += mode_num_ogc
+    csrnum += mode_num_csr
+
+    for ogclist in ogclists:
+        if ogclist[i] != mode_num_ogc:
+            ogclists.remove(ogclist)
+
+    for csrlist in csrlists:
+        if csrlist[i] != mode_num_csr:
+            csrlists.remove(csrlist)
+# for i in list(map(lambda x: int(x, 2), ogclists)):
+#     for j in list(map(lambda x: int(x, 2), csrlists)):
+#          print(i * j == 4474944)
+# print(int(ogcnum, 2) * int(csrnum, 2))
+# print(ogclist)
+
+print(list(map(lambda x: int(x, 2), raw_data)))
+"100000000000"
+numbers = list(map(lambda x: int(x, 2), raw_data))
+
+for i in range(12, -1, -1):
+    comparenumber = int("1" + i * "0", 2)
+    one_chooser = [number > comparenumber for number in numbers]
+    print(one_chooser)
+    zero_chooser = [number < comparenumber for number in numbers]
+    result = sum(one_chooser) >= sum(zero_chooser)
+    if result:
+        numbers = [i for (i, v) in zip(numbers, one_chooser) if v]
+    else:
+        numbers = [i for (i, v) in zip(numbers, zero_chooser) if v]
+print(numbers)
