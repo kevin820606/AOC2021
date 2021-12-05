@@ -67,7 +67,7 @@ class BoardGame_matrix:
     def check_win(self) -> bool:
         for i in range(0, 5):
             if (self.boards[i] == np.array([-1, -1, -1, -1, -1])).all() | (
-                self.boards[:, i] == np.array([-1, -1, -1, -1, -1]).all()
+                self.boards[:, i] == np.array([-1, -1, -1, -1, -1])
             ).all():
                 return True
         return False
