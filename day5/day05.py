@@ -12,6 +12,12 @@ class Point:
     y: int
 
 
+@dataclass
+class Line:
+    point_1: Point
+    point_2: Point
+
+
 with open("data/data_05.txt", "r") as raw:
     raw_data: list[str] = raw.read().splitlines()
     data = [
