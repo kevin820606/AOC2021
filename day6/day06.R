@@ -1,0 +1,1 @@
+# there're probably not different solution for Counter Version of python code.

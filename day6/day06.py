@@ -6,7 +6,7 @@ from collections import Counter
 def fishes_reproduct(days: int, data=list[int]):
     fishes: Counter[int] = Counter(data)
     print(f"Initial State: {fishes}")
-    for i in range(1, days + 1):
+    for _ in range(1, days + 1):
         new_fish = fishes[0]
         fishes[0] = fishes[1]
         fishes[1] = fishes[2]
