@@ -7,8 +7,8 @@ minmax <- min(number_vec):max(number_vec)
 # Q1
 sapply(minmax, FUN = function(x) sum(abs(number_vec - x))) |> min()
 # Q2
-Q2fun <- function(x) {
+q2_fun <- function(x) {
     dist <- abs(number_vec - x)
     sum(((1 + dist) * dist) / 2)
 }
-sapply(minmax, FUN = Q2fun) |> min()
+sapply(minmax, FUN = q2_fun) |> min()
