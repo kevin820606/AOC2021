@@ -41,10 +41,10 @@ for x in range(mat_x):
 from collections import Counter
 from functools import reduce
 
-a = reduce(lambda x, y: x + Counter(y), zero_mat, Counter())
+ansCounter: Counter = reduce(lambda x, y: x + Counter(y), zero_mat, Counter())
 ans = 1
-print(a)
-a.pop(0)
-for k, v in a.most_common(3):
+print(ansCounter)
+ansCounter.pop(0)
+for k, v in ansCounter.most_common(3):
     ans = ans * v
 print(ans)
