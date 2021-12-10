@@ -1,3 +1,4 @@
+# https://adventofcode.com/2021/day/8
 from collections import Counter
 from util import read
 import numpy as np
@@ -69,7 +70,7 @@ if __name__ == "__main__":
     # Q1_ans = Q1_solution(quetions_mat)
     # print(Q1_ans)
     # print(np.where(get_lowest_points(questions_mat=quetions_mat)))
-    AnsCounter = Counter()
+    AnsCounter: Counter[int] = Counter()
     Q2_mat = Q2_solution(questions_mat)
     for col in range(len(Q2_mat)):
         print(Q2_mat[col])
