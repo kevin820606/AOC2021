@@ -1,5 +1,5 @@
 #! /usr/bin/Rscript
-source("util.R", encoding = "UTF-8")
+source("R_solution/util.R", encoding = "UTF-8")
 library("dplyr")
 
 half_brackets <- r"(\)|\}|\]|\>)"
