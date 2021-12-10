@@ -2,7 +2,6 @@
 # https://adventofcode.com/2021/day/10
 # EZ
 from typing import Iterator
-from python_solution.day08 import Q1
 from util import read
 from pprint import pprint as print
 from functools import reduce
@@ -55,5 +54,5 @@ def Q2_Score(lines: list[str]) -> int:
 
 if __name__ == "__main__":
     raw_data = read(10, False)
-    # print(Q1_Score(raw_data))
+    print(Q1_Score(raw_data))
     print(Q2_Score(raw_data))
