@@ -10,7 +10,8 @@ split_to_matrix <- function(lines) {
     }
     mat
 }
-
+# Key point that beat python solution
+# --> matrix index by single digit rather than a tuple
 get_surround <- function(point) {
     back_move <- c(-11, -1, 9) + point
     horizon_move <- c(-10, 10) + point
