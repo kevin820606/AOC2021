@@ -1,6 +1,7 @@
 from typing_extensions import runtime
 from util import read
 import numpy as np
+from pprint import pprint as print
 
 
 def string_to_matrix(raw_data: list[str]) -> np.matrix:
@@ -22,8 +23,6 @@ def impact_range(
     og_x, og_y = explode_point
     for dx in range(-1, 2):
         for dy in range(-1, 2):
-            if dx == dy == 0:
-                continue
             xdx = og_x + dx
             ydx = og_y + dy
             in_range = _constrained_in_matrix((xdx, ydx))
@@ -32,21 +31,17 @@ def impact_range(
 
 
 def add_energy(octopus: np.matrix) -> tuple[np.matrix, int]:
-    impacts = [octopus > -1]
+    impacts = [np.where(octopus > -1)]
     flashed = np.zeros(shape=octopus.shape)
     while impacts:
         impact = impacts.pop(0)
-        octopus[np.where(impact)] += 1
+        octopus[impact] += 1
         flash = octopus >= 10
+        if np.logical_xor(flash, flashed).any():
+            newspot = np.where(np.logical_xor(flash, flashed))
+            impacts.extend(impact_range(newspot))
         flashed = np.logical_or(flash, flashed)
-        octopus[flashed] = 0
-        if flash.any():
-            for impactrange in impact_range(np.where(flash)):
-                impactmap = np.zeros(shape=octopus.shape)
-                impactmap[impactrange] = 1
-                impactmap = np.logical_and(impactmap, np.logical_not(flashed))
-                impacts.append(impactmap)
-
+    octopus[flashed] = 0
     flashTimes = flashed.sum()
     return np.matrix(octopus), flashTimes
 
@@ -64,13 +59,13 @@ def Q2_simultaneously(octopus: np.matrix) -> int:
     while True:
         octopus, _ = add_energy(octopus=octopus)
         run_time += 1
-        if (octopus == octopus[0, 0]).all():
-            print(octopus)
-            return run_time
+        if octopus.sum() in range(0, 1000, 100):
+            if (octopus == octopus[0, 0]).all():
+                return run_time
 
 
 if __name__ == "__main__":
     raw_data = read(11, False)
     octopus = string_to_matrix(raw_data=raw_data)
-    Q1_multiple_impacts(100, octopus=octopus)
+    print(Q1_multiple_impacts(100, octopus=octopus))
     print(Q2_simultaneously(octopus=octopus))
