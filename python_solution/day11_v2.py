@@ -1,4 +1,3 @@
-from typing_extensions import runtime
 from util import read
 import numpy as np
 from pprint import pprint as print
@@ -59,9 +58,8 @@ def Q2_simultaneously(octopus: np.matrix) -> int:
     while True:
         octopus, _ = add_energy(octopus=octopus)
         run_time += 1
-        if octopus.sum() in range(0, 1000, 100):
-            if (octopus == octopus[0, 0]).all():
-                return run_time
+        if octopus[0, 0] * 100 == octopus.sum():
+            return run_time
 
 
 if __name__ == "__main__":
