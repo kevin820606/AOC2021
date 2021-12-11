@@ -23,7 +23,6 @@ add_energy <- function(mat) {
     while (length(flash)) {
         for (fl in flash) mat[fl] <- mat[fl] + 1
         flash <- sapply(which(mat >= 10), get_surround, flashed)
-        print(flash)
         flashed <- unique(c(flashed, which(mat >= 10)))
     }
     mat[flashed] <- 0
