@@ -1,4 +1,5 @@
-from typing_extensions import runtime
+#! /usr/bin/env python3
+# https://adventofcode.com/2021/day/11
 from util import read
 import numpy as np
 
