@@ -12,6 +12,7 @@ scipy = "^1.7.3"
 [tool.poetry.dev-dependencies]
 mypy = "^0.910"
 black = {version = "^21.11b1", allow-prereleases = true}
+ipython = "^7.30.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
